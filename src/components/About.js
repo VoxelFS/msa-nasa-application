@@ -1,0 +1,84 @@
+import React from "react";
+import Nav from "./Nav";
+import { Box, Card, CardContent, Container, Divider, Grid, Stack, Typography } from "@mui/material";
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import EmailIcon from '@mui/icons-material/Email';
+
+export default function About() {
+    return (
+        <>
+        <Nav />
+        <Container maxWidth="md" sx={{ mt: 12}}>
+        <Stack direction="column" spacing={0}>
+            <Typography variant="h4">
+                About this site
+            </Typography>
+            <Grid container spacing={2}>
+                <Grid item xs>
+                    <Card sx={{ minWidth: 270, minHeight: 350}}>
+                        <CardContent>
+                            <Box sx={{ m: 1 }}>
+                            <Typography variant="h5" component="div">
+                                <TravelExploreIcon />
+                                <br/>
+                                Search for images
+                            </Typography>
+                            </Box>
+                            <Divider />
+                            <Box sx={{ m: 1 }}>
+                            <Typography variant="body2">
+                                This page fetches images from the NASA image library based on the keyword which the user enters.
+                                Images returned from the library will be displayed in an image grid.
+                            </Typography>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs>
+                    <Card sx={{ minWidth: 270, minHeight: 350}}>
+                        <CardContent>
+                            <Box sx={{ m: 1 }}>
+                            <Typography variant="h5" component="div">
+                                <RocketLaunchIcon />
+                                <br/>
+                                Picture of the day
+                            </Typography>
+                            </Box>
+                            <Divider />
+                            <Box sx={{ m: 1 }}>
+                            <Typography variant="body2">
+                                This page fetches the Astronomy picture of the day from the NASA API and displays it.
+                                The page displays the image along with the title, date and a brief explanation of the image.
+                            </Typography>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs>
+                    <Card sx={{ minWidth: 270, minHeight: 350}}>
+                        <CardContent>
+                            <Box sx={{ m: 1}}>
+                            <Typography variant="h5" component="div">
+                                <EmailIcon />
+                                <br/>
+                                Sign ups
+                            </Typography>
+                            </Box>
+                            <Divider />
+                            <Box sx={{ m: 1}}>
+                            <Typography variant="body2">
+                                This page allows the user to enter their name and Email. This application will then send a daily Email 
+                                to the user where the contents are the NASA astronomy picture of the day.
+
+                            </Typography>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            </Grid>
+        </Stack>
+        </Container>
+        </>
+    );
+}
