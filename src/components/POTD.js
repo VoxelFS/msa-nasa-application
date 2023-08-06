@@ -31,14 +31,10 @@ export default function POTD() {
             <Nav />
             <Container maxWidth="md" sx={{ mt: 10 }}>
                 <Stack direction="column" spacing={1}>
-                    <Card sx={{ minWidth: 1057}}>
-                        <CardContent>
-                            <Typography variant="h4" sx={{fontSize: 30}}>
-                            
-                                <b>{photoData.title}</b>
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <Typography variant="h4" sx={{fontSize: 30}}>
+                    
+                        <b>{photoData.title}</b>
+                    </Typography>
                     <Stack 
                         direction="row"
                         divider={<Divider orientation="vertical" flexItem />}
