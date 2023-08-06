@@ -25,7 +25,7 @@ export const mainNavBarItems = [
     {
         id: 3,
         icon: <EmailIcon />,
-        label: "Sign up",
+        label: "Leave Feedback",
         route: '/subscribe'
     }
 ]

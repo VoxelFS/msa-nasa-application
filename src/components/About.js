@@ -62,14 +62,14 @@ export default function About() {
                             <Typography variant="h5" component="div">
                                 <EmailIcon />
                                 <br/>
-                                Sign ups
+                                Leave Feedback
                             </Typography>
                             </Box>
                             <Divider />
                             <Box sx={{ m: 1}}>
                             <Typography variant="body2">
-                                This page allows the user to enter their name and Email. This application will then send a daily Email 
-                                to the user where the contents are the NASA astronomy picture of the day.
+                                This page allows the user to enter their name and feedback about the site. This application will then submit
+                                the feedback to the database. This allows the admin to read and implement some feedbacks
 
                             </Typography>
                             </Box>

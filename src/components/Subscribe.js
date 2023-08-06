@@ -10,27 +10,41 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import EmailIcon from '@mui/icons-material/Email';
 import Nav from './Nav';
+import { Card, CardActions, CardContent, Modal } from '@mui/material';
 
 const defaultTheme = createTheme();
 
 export default function Subscribe() {
 
+    const [open, setOpen] = React.useState(false);
+
     async function handleSubmit(event) {
+        setOpen(true);
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-
-        await fetch('/api/email', {
-            method: 'POST',
-            body: JSON.stringify({
-                firstName: data.get('name')
-            })
-        })
-
-        console.log({
-          email: data.get('email'),
-          name: data.get('name'),
+        const feedback = data.get('feedback');
+        const name = data.get('name');
+        
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
+        const raw = JSON.stringify({
+        "id": 0,
+        "name": name,
+        "email": feedback, // i know that it says email, but couldnt change this to feedback due to time constraints. please just think of email as feedback :D
         });
+        
+        const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        };
+        
+        await fetch("https://msa-nasa-project.azurewebsites.net/api/Users", requestOptions);
+        
       };
+
+    
 
     return (
         <>
@@ -53,8 +67,8 @@ export default function Subscribe() {
                         <Avatar sx={{ m: 1}}>
                             <EmailIcon />
                         </Avatar>
-                        <Typography component="h2" variant="h5">
-                            Sign up to receive daily NASA images
+                        <Typography component="h3" variant="h6">
+                            Have feedback on the site? Leave them here!
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
@@ -74,10 +88,11 @@ export default function Subscribe() {
                                     <TextField
                                     required
                                     fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
+                                    id="feedback"
+                                    label="Leave some feedback"
+                                    name="feedback"
+                                    multiline
+                                    rows={6}
                                     />
                                 </Grid>
                             </Grid>
@@ -87,7 +102,7 @@ export default function Subscribe() {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Sign Up
+                                Send
                             </Button>
                             <Grid container justifyContent="flex-end">
                             </Grid>
@@ -96,7 +111,32 @@ export default function Subscribe() {
                 </Container>
             </ThemeProvider>
         </Container>
-
+        
+        <Container>
+            <Modal 
+                open={open}
+                onClose={() => setOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh", 
+                }}
+            >
+                <Card sx={{ minWidth: 275 }}>
+                    <CardContent>
+                        <Typography variant='h5' component="div">
+                            Thank you for your feedback!
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="medium" onClick={() => setOpen(false)}>Close</Button>
+                    </CardActions>
+                </Card>
+            </Modal>
+        </Container>
         </>
     );
 }

@@ -11,11 +11,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { mainNavBarItems } from './NavBarComponents/NavConsts';
 import { useNavigate } from 'react-router-dom';
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useAuth } from './Auth';
+import LoginIcon from '@mui/icons-material/Login';
 
 export default function Nav() {
     const drawerWidth = 240
     const navigate = useNavigate();
+
+    const auth = useAuth();
 
     return (
         <>
@@ -67,7 +71,52 @@ export default function Nav() {
             </ListItem>
             ))}
         </List>
+        <Divider />
+        {
+         auth.user && (<List>
+          {['Account'].map((text) => (
+            <ListItem
+                button 
+                key={text} 
+                disablePadding
+                onClick={() => navigate('/account')}
+              >
+              <ListItemButton>
+                <ListItemIcon sx={{
+                  color: 'rgba(255, 255, 255, 0.7)'
+                }}>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         
+        </List>
+        )}
+        {
+          !auth.user && (
+            <List>
+              {['Log In'].map((text) => (
+                <ListItem
+                    button 
+                    key={text} 
+                    disablePadding
+                    onClick={() => navigate('/login')}
+                  >
+                  <ListItemButton>
+                    <ListItemIcon sx={{
+                      color: 'rgba(255, 255, 255, 0.7)'
+                    }}>
+                      <LoginIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          )
+        }
         </Drawer>
         
         </>
