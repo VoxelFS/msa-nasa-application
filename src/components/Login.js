@@ -73,6 +73,7 @@ export const Login = () => {
                                         label="Password"
                                         type="password"
                                         id="password"
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Grid>
                             </Grid>
