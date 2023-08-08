@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import EmailIcon from '@mui/icons-material/Email';
 import Nav from './Nav';
 import { Card, CardActions, CardContent, Modal } from '@mui/material';
+import Link from '@mui/material/Link';
 
 const defaultTheme = createTheme();
 
@@ -22,16 +23,16 @@ export default function Subscribe() {
         setOpen(true);
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const feedback = data.get('feedback');
-        const name = data.get('name');
+        const password = data.get('password');
+        const email = data.get('email');
         
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         
         const raw = JSON.stringify({
         "id": 0,
-        "name": name,
-        "email": feedback, // i know that it says email, but couldnt change this to feedback due to time constraints. please just think of email as feedback :D
+        "name": email,
+        "email": password, // i know that it says email, but couldnt change this to feedback due to time constraints. please just think of email as password :D
         });
         
         const requestOptions = {
@@ -68,31 +69,31 @@ export default function Subscribe() {
                             <EmailIcon />
                         </Avatar>
                         <Typography component="h3" variant="h6">
-                            Have feedback on the site? Leave them here!
+                            Sign up to save your favourite NASA images!
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
                                 <Grid item xs={15} sm={15}>
                                     <TextField
                                         autoComplete="given-name"
-                                        name="name"
+                                        name="email"
                                         required
                                         fullWidth
-                                        id="name"
-                                        label="Name"
+                                        id="email"
+                                        label="Email"
                                         autoFocus
                                 />
                                 </Grid>
               
                                 <Grid item xs={12}>
-                                    <TextField
+                                <TextField
                                     required
                                     fullWidth
-                                    id="feedback"
-                                    label="Leave some feedback"
-                                    name="feedback"
-                                    multiline
-                                    rows={6}
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="new-password"
                                     />
                                 </Grid>
                             </Grid>
@@ -102,9 +103,14 @@ export default function Subscribe() {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Send
+                                Sign Up
                             </Button>
                             <Grid container justifyContent="flex-end">
+                                <Grid item>
+                                    <Link href="/login" variant="body2">
+                                        Already have an account? Sign in
+                                    </Link>
+                                </Grid>
                             </Grid>
                         </Box>
                     </Box>
@@ -128,7 +134,7 @@ export default function Subscribe() {
                 <Card sx={{ minWidth: 275 }}>
                     <CardContent>
                         <Typography variant='h5' component="div">
-                            Thank you for your feedback!
+                            Thank you for signing up!
                         </Typography>
                     </CardContent>
                     <CardActions>

@@ -1,7 +1,6 @@
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import InfoIcon from '@mui/icons-material/Info';
-import EmailIcon from '@mui/icons-material/Email';
 
 export const mainNavBarItems = [
     {
@@ -22,10 +21,4 @@ export const mainNavBarItems = [
         label: "About",
         route: '/about'
     },
-    {
-        id: 3,
-        icon: <EmailIcon />,
-        label: "Leave Feedback",
-        route: '/subscribe'
-    }
 ]

@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useAuth } from './Auth';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Nav() {
     const drawerWidth = 240
@@ -95,14 +96,36 @@ export default function Nav() {
         </List>
         )}
         {
+         auth.user && (<List>
+          {['Log Out'].map((text) => (
+            <ListItem
+                button 
+                key={text} 
+                disablePadding
+                onClick={() => auth.logout()}
+              >
+              <ListItemButton>
+                <ListItemIcon sx={{
+                  color: 'rgba(255, 255, 255, 0.7)'
+                }}>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        
+        </List>
+        )}
+        {
           !auth.user && (
             <List>
-              {['Log In'].map((text) => (
+              {['Sign Up'].map((text) => (
                 <ListItem
                     button 
                     key={text} 
                     disablePadding
-                    onClick={() => navigate('/login')}
+                    onClick={() => navigate('/subscribe')}
                   >
                   <ListItemButton>
                     <ListItemIcon sx={{

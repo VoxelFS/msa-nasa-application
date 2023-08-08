@@ -18,6 +18,7 @@ export default function Home() {
         );
         const pre = await res.json();
         setPhotos(await pre.collection.items);
+        console.log(photos) 
     }
 
     return ( 
@@ -34,6 +35,7 @@ export default function Home() {
                         label="Search beyond the stars..."
                         value={search}
                         onChange={handleChange}
+                        autoFocus
                         sx={{ width: 600}}
                     />
                     <Button variant="contained" disabled={search === ""} onClick={async () => await searchNASA()}>Search</Button>

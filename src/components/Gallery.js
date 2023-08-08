@@ -7,16 +7,39 @@ import { CardActions, Container } from "@mui/material";
 import { Modal } from "@mui/material";
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Button } from "@mui/material";
 import { Box } from "@mui/material"
+import { useAuth } from "./Auth";
 
 
 export default function Gallery({json, search}) {
 
     const [show, setShow] = useState(false);
-    const [modalDataIndex, setModalDataIndex] = useState(0)
+    const [modalDataIndex, setModalDataIndex] = useState(0);
+    const auth = useAuth();
 
     function handleModal(index) {
         setModalDataIndex(index)
         setShow(true);
+    }
+
+    async function savePhoto(image, title, description) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
+        var raw = JSON.stringify({
+        "id": 0,
+        "image": image,
+        "title": title,
+        "description": description,
+        "userID": auth.user
+        });
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        };
+
+        await fetch("https://msa-nasa-project.azurewebsites.net/api/Images", requestOptions);
     }
 
     return (
@@ -90,11 +113,13 @@ export default function Gallery({json, search}) {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                    <CardActions>
-                        <Button size="medium" color="primary" onClick={() => setShow(false)}>
-                            Close
+                    {auth.user && (
+                        <CardActions>
+                        <Button size="medium" color="primary" onClick={() => savePhoto(json[modalDataIndex].links[0].href, json[modalDataIndex].data[0].title, json[modalDataIndex].data[0].description)}>
+                            Save
                         </Button>
                     </CardActions>
+                    )}
                 </Card>
             </Modal>
         </Container>

@@ -8,20 +8,21 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import EmailIcon from '@mui/icons-material/Email';
 import Nav from './Nav';
 import { useAuth } from './Auth';
 import { useNavigate } from 'react-router-dom';
+import LoginIcon from '@mui/icons-material/Login';
 
 const defaultTheme = createTheme();
 
 export const Login = () => {
     const [user, setUser] = React.useState('');
+    const [password, setPassword] = React.useState('');
     const auth = useAuth();
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        auth.login(user);
+    const handleLogin = async () => {
+        await auth.login(user, password);
         navigate('/account', {replace: true});
     }
 
@@ -44,22 +45,37 @@ export const Login = () => {
                         }}
                     >
                         <Avatar sx={{ m: 1}}>
-                            <EmailIcon />
+                            <LoginIcon />
                         </Avatar>
                         <Typography component="h3" variant="h6">
-                            Please login to view feedback!
+                            Please login to view your saved photos!
                         </Typography>
                         <Box sx={{ mt: 3 }}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={15} sm={15}>
                                     <TextField
                                         autoComplete="given-name"
-                                        name="name"
+                                        name="email"
                                         required
                                         fullWidth
-                                        id="name"
-                                        label="Username"
+                                        id="email"
+                                        label="Email"
                                         autoFocus
                                         onChange={(e) => setUser(e.target.value)}
                                 />
+                                </Grid>
+              
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                    />
+                                </Grid>
+                            </Grid>
 
                             <Button
                                 type="submit"
@@ -70,8 +86,6 @@ export const Login = () => {
                             >
                                 Sign In
                             </Button>
-                            <Grid container justifyContent="flex-end">
-                            </Grid>
                         </Box>
                     </Box>
                 </Container>

@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import { Box, Card, CardContent, Container, Divider, Grid, Stack, Typography } from "@mui/material";
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import EmailIcon from '@mui/icons-material/Email';
+import LoginIcon from '@mui/icons-material/Login';
 
 export default function About() {
     return (
@@ -60,16 +60,16 @@ export default function About() {
                         <CardContent>
                             <Box sx={{ m: 1}}>
                             <Typography variant="h5" component="div">
-                                <EmailIcon />
+                                <LoginIcon />
                                 <br/>
-                                Leave Feedback
+                                Sign Up
                             </Typography>
                             </Box>
                             <Divider />
                             <Box sx={{ m: 1}}>
                             <Typography variant="body2">
-                                This page allows the user to enter their name and feedback about the site. This application will then submit
-                                the feedback to the database. This allows the admin to read and implement some feedbacks
+                                This page allows the user to sign up for an account and save their favourite NASA pictures. This page also 
+                                allows existing users to sign in to view their favourite NASA pictures.
 
                             </Typography>
                             </Box>
