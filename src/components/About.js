@@ -9,6 +9,15 @@ export default function About() {
     return (
         <>
         <Nav />
+        <Box sx={{
+                    marginTop: 20,
+                    marginLeft: 35,
+                    marginRight : 6,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    
+                }}>
         <Container maxWidth="md" sx={{ mt: 12}}>
         <Stack direction="column" spacing={0}>
             <Typography variant="h4">
@@ -79,6 +88,7 @@ export default function About() {
             </Grid>
         </Stack>
         </Container>
+        </Box>
         </>
     );
 }

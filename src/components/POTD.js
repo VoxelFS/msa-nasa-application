@@ -29,7 +29,16 @@ export default function POTD() {
     return (
         <div>
             <Nav />
-            <Container maxWidth="md" sx={{ mt: 10 }}>
+            <Box sx={{
+                    marginTop: 25,
+                    marginLeft: 35,
+                    marginRight : 6,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    
+                }}>
+            <Container maxWidth="md">
                 <Stack direction="column" spacing={1}>
                     <Typography variant="h4" sx={{fontSize: 30}}>
                     
@@ -81,6 +90,7 @@ export default function POTD() {
                     
                     
             </Container>
+            </Box>
             
             
         </div>

@@ -51,7 +51,7 @@ export default function Gallery({json, search}) {
             </ImageListItem>
             <Box sx={{
                 width: 1000,
-                height: 550,
+                height: 600,
                 overflowY: 'scroll'
             }}>
             <ImageList variant="masonry" cols={3} gap={7} >

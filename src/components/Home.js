@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Stack, TextField } from "@mui/material";
+import { Box, Button, Container, Stack, TextField } from "@mui/material";
 import Gallery from "./Gallery";
 import Nav from "./Nav";
 
@@ -26,7 +26,16 @@ export default function Home() {
             <div>
                 <Nav />
             </div>
-            <Container maxWidth="md" sx={{ mt: 10 }}>
+            <Box sx={{
+                    marginTop: 20,
+                    marginLeft: 35,
+                    marginRight : 6,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    
+                }}>
+            <Container maxWidth="md">
                 <Stack spacing={2} direction="row">
                 
                     <TextField
@@ -43,9 +52,17 @@ export default function Home() {
                 </Stack>
             </Container>
             <div>
-                {photos && <Gallery json={photos} search={search} />}
+                <Box sx={{ 
+                        marginRight: 52,
+                        marginLeft: 20,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}>
+                    {photos && <Gallery json={photos} search={search} />}
+                </Box>
             </div>
-            
+            </Box>
         </div>
     );
 }
