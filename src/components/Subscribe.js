@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import EmailIcon from '@mui/icons-material/Email';
 import Nav from './Nav';
-import { Card, CardActions, CardContent, Modal } from '@mui/material';
+import { Card, CardActions, CardContent, Divider, Modal } from '@mui/material';
 import Link from '@mui/material/Link';
 
 const defaultTheme = createTheme();
@@ -18,9 +18,10 @@ const defaultTheme = createTheme();
 export default function Subscribe() {
 
     const [open, setOpen] = React.useState(false);
+    const [exist, setExist] = React.useState(false);
 
     async function handleSubmit(event) {
-        setOpen(true);
+        
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const password = data.get('password');
@@ -41,8 +42,13 @@ export default function Subscribe() {
         body: raw,
         };
         
-        await fetch("https://msa-nasa-project.azurewebsites.net/api/Users", requestOptions);
-        
+        const res = await fetch("https://msa-nasa-project.azurewebsites.net/api/Users", requestOptions);
+        if (res.ok === true) {
+            setOpen(true);
+        }
+        else if (res.ok === false) {
+            setExist(true);
+        }
       };
 
     
@@ -136,9 +142,41 @@ export default function Subscribe() {
                         <Typography variant='h5' component="div">
                             Thank you for signing up!
                         </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            You can sign in now.
+                        </Typography>
                     </CardContent>
                     <CardActions>
                         <Button size="medium" onClick={() => setOpen(false)}>Close</Button>
+                    </CardActions>
+                </Card>
+            </Modal>
+        </Container>
+
+        <Container>
+            <Modal 
+                open={exist}
+                onClose={() => setExist(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh", 
+                }}
+            >
+                <Card sx={{ minWidth: 275 }}>
+                    <CardContent>
+                        <Typography variant='h5' component="div">
+                            Account already exists.
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            Please sign in instead.
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="medium" onClick={() => setExist(false)}>Close</Button>
                     </CardActions>
                 </Card>
             </Modal>

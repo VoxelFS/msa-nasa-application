@@ -74,7 +74,7 @@ export default function Account() {
                         maxHeight: 700, overflow: 'hidden', overflowY: 'scroll'
                     }}>  
                         <Grid container spacing={4} >
-                            <ImageList variant="masonry" cols={3} gap={8}>
+                            {images.length != 0 ? (<ImageList variant="masonry" cols={3} gap={8}>
                                 {images && (images.map((item, index) => (
                                     <ImageListItem key={index} onClick={() => handleModal(item.image, item.title, item.description)}>
                                         <img
@@ -90,6 +90,7 @@ export default function Account() {
                                     </ImageListItem>
                                 )))}
                             </ImageList>
+                            ) : <Typography variant="h5" color="text.secondary">You do not have any images saved currently.</Typography>}
                         </Grid>
             
                     </Stack>

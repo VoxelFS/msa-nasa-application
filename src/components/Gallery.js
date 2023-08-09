@@ -40,6 +40,7 @@ export default function Gallery({json, search}) {
         };
 
         await fetch("https://msa-nasa-project.azurewebsites.net/api/Images", requestOptions);
+        setShow(false);
     }
 
     return (
